@@ -1,0 +1,245 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Deploy Keifer</title>
+    <meta name="description" content="github/GuillaumeBergeronGeoffroy/can-money-paint — Deploy Button">
+    <meta name="author" content="github/GuillaumeBergeronGeoffroy">
+
+    <link rel="icon" href="./images/favicon.png">
+
+</head>
+
+<body id='body'>
+    <main>
+        <div class='button-container'>
+            <div class='deploy-status'></div>
+            <div class='center'>
+                <!-- <div style='color:#CBCBCB;font-size:32px;text-align:center;margin-bottom:20px;'>Deploy ?</div> -->
+                <div class='pre-click'>
+                    <img onclick='deploy()' style='width:175px;height:150px;' src='./images/Redbutton.svg' />
+                </div>
+                <div class='fail'>
+                    <img onclick='revert()' src='./images/Redbutton-crash.svg' />
+                </div>
+                <div class='success'>
+                    <img onclick='revert()' src='./images/Redbutton-success.svg' />
+                </div>
+            </div>
+            <div class='deploy-question'></div>
+        </div>
+        <div class='menu-container'>
+            <div class='menu-text'>Deployment Success</div>
+            <div class='success-count' style='margin-bottom:40px;'>0</div>
+            <div class='menu-text'>Full System Crash</div>
+            <div class='errors-count'>0</div>
+        </div>
+    </main>
+
+    <script>
+        var setCookie = function (c_name, value) {
+            return localStorage.setItem(c_name, value);
+        }
+        var getCookie = function (c_name) {
+            return localStorage.getItem(c_name);
+        }
+        var counts = {
+            success: getCookie('success') * 1,
+            errors: getCookie('errors') * 1,
+        };
+        var setCounts = function () {
+            document.querySelector('.success-count').innerText = counts.success;
+            document.querySelector('.errors-count').innerText = counts.errors;
+        }
+        setCounts();
+        var deploy = function () {
+            var rand = Math.random();
+            document.querySelector('.pre-click').style.display = 'none';
+            if (rand < 0.25) {
+                counts.success += 1;
+                document.querySelector('.success').style.display = 'block';
+                document.querySelector('.deploy-status').innerText = 'Deployment Success!';
+                document.querySelector('.deploy-status').style.color = '#719500';
+                document.querySelector('.deploy-question').style.color = '#719500';
+                if (rand < 0.025) {
+                    document.querySelector('.deploy-question').innerText = 'One done, plenty to go!';
+                } else if (rand < 0.05) {
+                    document.querySelector('.deploy-question').innerText = 'Lucks on our side';
+                } else if (rand < 0.10) {
+                    document.querySelector('.deploy-question').innerText = 'Can you belive it?';
+                } else if (rand < 0.15) {
+                    document.querySelector('.deploy-question').innerText = 'Miracles do happen';
+                } else if (rand < 0.175) {
+                    document.querySelector('.deploy-question').innerText = 'Someone deserves a raise!';
+                } else if (rand < 0.20) {
+                    document.querySelector('.deploy-question').innerText = 'Better monitor Parot!';
+                } else if (rand < 0.225) {
+                    document.querySelector('.deploy-question').innerText = 'Parot is a bird!';
+                } else {
+                    document.querySelector('.deploy-question').innerText = 'This is new';
+                }
+                setCookie('success', counts.success);
+            } else {
+                counts.errors += 1;
+                document.querySelector('.fail').style.display = 'block';
+                document.querySelector('.deploy-status').innerText = 'Full System Crash!';
+                document.querySelector('.deploy-status').style.color = '#F77629';
+                document.querySelector('.deploy-question').style.color = '#F77629';
+                if (rand < 0.30) {
+                    document.querySelector('.deploy-question').innerText = 'Here we go again';
+                } else if (rand < 0.40) {
+                    document.querySelector('.deploy-question').innerText = 'Did anyone review this?';
+                } else if (rand < 0.50) {
+                    document.querySelector('.deploy-question').innerText = 'Gonna fix until midnight…';
+                } else if (rand < 0.60) {
+                    document.querySelector('.deploy-question').innerText = 'Hello, ladybugs';
+                } else if (rand < 0.70) {
+                    document.querySelector('.deploy-question').innerText = 'Who wrote this piece of shiite';
+                } else if (rand < 0.80) {
+                    document.querySelector('.deploy-question').innerText = 'We do love creative destruction';
+                } else {
+                    document.querySelector('.deploy-question').innerText = 'Did Guillaume touch this code?';
+                }
+                setCookie('errors', counts.errors);
+            }
+            document.querySelector('.deploy-status').style.opacity = '1';
+            document.querySelector('.deploy-question').style.opacity = '1';
+            setCounts();
+        }
+        var revert = function () {
+            document.querySelector('.success').style.display = 'none';
+            document.querySelector('.fail').style.display = 'none';
+            document.querySelector('.deploy-status').style.opacity = '0';
+            document.querySelector('.deploy-question').style.opacity = '0';
+            document.querySelector('.pre-click').style.display = 'block';
+        }
+    </script>
+
+</body>
+
+</html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        color: #707070;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main {
+        display: flex;
+    }
+
+    .button-container {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .menu-container .menu-text {
+        margin-bottom: 14px;
+        font-size: 16px;
+        color: #707070;
+    }
+
+    .menu-container div:not(.menu-text) {
+        font-size: 50px;
+        color: #000000;
+        padding-top: 19px;
+        padding-bottom: 13px;
+        background: #FFFFFF;
+        border: 1px solid #719500;
+        border-radius: 12px;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    .menu-container {
+        width: 254px;
+        background: #F7F8F8;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding-left: 30px;
+        padding-right: 30px;
+        justify-content: center;
+    }
+
+    .button-container .center {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+    }
+
+    .pre-click {
+        margin-top: 25px;
+    }
+
+    .fail,
+    .success {
+        display: none;
+        margin-top: -15px;
+    }
+
+    .fail img,
+    .success img {
+        width: 206px;
+    }
+
+    .deploy-status,
+    .deploy-question {
+        position: absolute;
+        max-width: 256px;
+        margin: auto;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all 0.3s;
+    }
+
+    .deploy-status {
+        top: calc(50% - 235px);
+        font-size: 44px;
+        left: 50%;
+    }
+
+    .deploy-question {
+        position: absolute;
+        top: calc(50% + 180px);
+        font-size: 32px;
+    }
+
+    .button-container img {
+        cursor: pointer;
+    }
+
+
+    @media(max-width: 625px) {
+
+        .deploy-status,
+        .deploy-question {
+            display: none;
+        }
+
+        main {
+            display: block;
+        }
+
+        .button-container {
+            height: calc(100vh - 350px);
+            min-height: 125px;
+        }
+
+        .menu-container {
+            width: calc(100% - 60px);
+            height: 350px;
+        }
+    }
+</style>
