@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Deploy Keifer</title>
-    <meta name="description" content="github/GuillaumeBergeronGeoffroy/can-money-paint — Deploy Button">
+    <title>Deploy!</title>
+    <meta name="description" content="github/GuillaumeBergeronGeoffroy/deploy-button — Deploy Button">
     <meta name="author" content="github/GuillaumeBergeronGeoffroy">
 
     <link rel="icon" href="./images/favicon.png">
@@ -18,8 +18,10 @@
     <main>
         <div class='button-container'>
             <div class='deploy-status'></div>
+            <div class='deploy-cta'>
+                Deploy ?
+            </div>
             <div class='center'>
-                <!-- <div style='color:#CBCBCB;font-size:32px;text-align:center;margin-bottom:20px;'>Deploy ?</div> -->
                 <div class='pre-click'>
                     <img onclick='deploy()' style='width:175px;height:150px;' src='./images/Redbutton.svg' />
                 </div>
@@ -58,54 +60,57 @@
         setCounts();
         var deploy = function () {
             var rand = Math.random();
+            var color = '#719500';
+            var text = '';
             document.querySelector('.pre-click').style.display = 'none';
-            if (rand < 0.25) {
+            document.querySelector('.deploy-cta').style.opacity = '0';
+            if (rand < 0.20) {
                 counts.success += 1;
                 document.querySelector('.success').style.display = 'block';
                 document.querySelector('.deploy-status').innerText = 'Deployment Success!';
-                document.querySelector('.deploy-status').style.color = '#719500';
-                document.querySelector('.deploy-question').style.color = '#719500';
                 if (rand < 0.025) {
-                    document.querySelector('.deploy-question').innerText = 'One done, plenty to go!';
+                    text = 'One done, plenty to go!';
                 } else if (rand < 0.05) {
-                    document.querySelector('.deploy-question').innerText = 'Lucks on our side';
+                    text = 'Lucks on our side';
+                } else if (rand < 0.075) {
+                    text = 'Can you belive it?';
                 } else if (rand < 0.10) {
-                    document.querySelector('.deploy-question').innerText = 'Can you belive it?';
+                    text = 'Miracles do happen';
+                } else if (rand < 0.125) {
+                    text = 'Someone deserves a raise!';
                 } else if (rand < 0.15) {
-                    document.querySelector('.deploy-question').innerText = 'Miracles do happen';
+                    text = 'Better monitor Parot!';
                 } else if (rand < 0.175) {
-                    document.querySelector('.deploy-question').innerText = 'Someone deserves a raise!';
-                } else if (rand < 0.20) {
-                    document.querySelector('.deploy-question').innerText = 'Better monitor Parot!';
-                } else if (rand < 0.225) {
-                    document.querySelector('.deploy-question').innerText = 'Parot is a bird!';
+                    text = 'Parot is a bird!';
                 } else {
-                    document.querySelector('.deploy-question').innerText = 'This is new';
+                    text = 'This is new';
                 }
                 setCookie('success', counts.success);
             } else {
                 counts.errors += 1;
+                color = '#F77629';
                 document.querySelector('.fail').style.display = 'block';
                 document.querySelector('.deploy-status').innerText = 'Full System Crash!';
-                document.querySelector('.deploy-status').style.color = '#F77629';
-                document.querySelector('.deploy-question').style.color = '#F77629';
                 if (rand < 0.30) {
-                    document.querySelector('.deploy-question').innerText = 'Here we go again';
+                    text = 'Here we go again';
                 } else if (rand < 0.40) {
-                    document.querySelector('.deploy-question').innerText = 'Did anyone review this?';
+                    text = 'Did anyone review this?';
                 } else if (rand < 0.50) {
-                    document.querySelector('.deploy-question').innerText = 'Gonna fix until midnight…';
+                    text = 'Gonna fix until midnight…';
                 } else if (rand < 0.60) {
-                    document.querySelector('.deploy-question').innerText = 'Hello, ladybugs';
+                    text = 'Hello, ladybugs';
                 } else if (rand < 0.70) {
-                    document.querySelector('.deploy-question').innerText = 'Who wrote this piece of shiite';
+                    text = 'Who wrote this piece of shiite';
                 } else if (rand < 0.80) {
-                    document.querySelector('.deploy-question').innerText = 'We do love creative destruction';
+                    text = 'We love creative destruction';
                 } else {
-                    document.querySelector('.deploy-question').innerText = 'Did Guillaume touch this code?';
+                    text = 'Did Guillaume touch this code?';
                 }
                 setCookie('errors', counts.errors);
             }
+            document.querySelector('.deploy-question').innerText = text;
+            document.querySelector('.deploy-status').style.color = color;
+            document.querySelector('.deploy-question').style.color = color;
             document.querySelector('.deploy-status').style.opacity = '1';
             document.querySelector('.deploy-question').style.opacity = '1';
             setCounts();
@@ -115,6 +120,7 @@
             document.querySelector('.fail').style.display = 'none';
             document.querySelector('.deploy-status').style.opacity = '0';
             document.querySelector('.deploy-question').style.opacity = '0';
+            document.querySelector('.deploy-cta').style.opacity = '1';
             document.querySelector('.pre-click').style.display = 'block';
         }
     </script>
@@ -201,7 +207,8 @@
         text-align: center;
         left: 50%;
         transform: translateX(-50%);
-        transition: all 0.3s;
+        transition: all 0.45s;
+        color: #719500;
     }
 
     .deploy-status {
@@ -218,6 +225,17 @@
 
     .button-container img {
         cursor: pointer;
+    }
+
+    .deploy-cta {
+        position: absolute;
+        top: calc(50% - 120px);
+        left: 50%;
+        transform: translateX(-50%);
+        color: #CBCBCB;
+        font-size: 32px;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
 
